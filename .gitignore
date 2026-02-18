@@ -1,0 +1,13 @@
+# Julia
+Manifest.toml
+
+# Output (regenerable)
+output/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
