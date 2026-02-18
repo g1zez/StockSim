@@ -85,16 +85,15 @@ function plot_simulation_fan(ticker::String, df::DataFrame, sim_paths::Matrix{Fl
     p75 = [quantile(sim_paths[t, :], 0.75) for t in 1:n_sim_days]
     p90 = [quantile(sim_paths[t, :], 0.90) for t in 1:n_sim_days]
     
-    # Determine y-axis range
-    all_prices = vcat(hist_prices, vec(sim_paths))
-    y_max = quantile(all_prices, 0.98) * 1.1  # cap at 98th percentile + margin
-    y_min = max(0, minimum(hist_prices) * 0.8)
+    # Use log scale — standard for multi-year price projections
+    # Log-normal returns create symmetric bands on log scale
+    y_min = minimum(hist_prices) * 0.8
     
     # Start the plot with historical data
     p = plot(hist_dates, hist_prices,
         title = "$ticker — Historical + Simulated Price Trajectories",
         xlabel = "Date",
-        ylabel = "Price (USD)",
+        ylabel = "Price (USD, log scale)",
         label = "Historical",
         linewidth = 2.0,
         linecolor = :steelblue,
@@ -109,7 +108,8 @@ function plot_simulation_fan(ticker::String, df::DataFrame, sim_paths::Matrix{Fl
         titlefontsize = 14,
         guidefontsize = 11,
         tickfontsize = 9,
-        ylims = (y_min, y_max))
+        yscale = :log10,
+        ylims = (y_min, :auto))
     
     # Add 10-90th percentile band
     plot!(p, future_dates, p10,

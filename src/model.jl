@@ -56,8 +56,10 @@ function fit_regime_model(ticker::String, log_returns::Vector{Float64}; k::Int=2
     bear_regime = argmin(μ)
     
     @info "  Regime parameters for $ticker:"
-    @info "    Bull regime ($bull_regime): μ = $(@sprintf("%.6f", μ[bull_regime])), σ = $(@sprintf("%.6f", σ[bull_regime]))"
-    @info "    Bear regime ($bear_regime): μ = $(@sprintf("%.6f", μ[bear_regime])), σ = $(@sprintf("%.6f", σ[bear_regime]))"
+    @info "    Bull regime ($bull_regime): μ_daily = $(@sprintf("%.6f", μ[bull_regime])), σ_daily = $(@sprintf("%.6f", σ[bull_regime]))"
+    @info "      Annualised: return ≈ $(@sprintf("%.1f", μ[bull_regime]*252*100))%, vol ≈ $(@sprintf("%.1f", σ[bull_regime]*sqrt(252)*100))%"
+    @info "    Bear regime ($bear_regime): μ_daily = $(@sprintf("%.6f", μ[bear_regime])), σ_daily = $(@sprintf("%.6f", σ[bear_regime]))"
+    @info "      Annualised: return ≈ $(@sprintf("%.1f", μ[bear_regime]*252*100))%, vol ≈ $(@sprintf("%.1f", σ[bear_regime]*sqrt(252)*100))%"
     @info "    P(stay bull) = $(@sprintf("%.4f", P[bull_regime, bull_regime])), P(stay bear) = $(@sprintf("%.4f", P[bear_regime, bear_regime]))"
     
     # Expected regime durations

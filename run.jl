@@ -22,8 +22,10 @@ const N_PATHS       = 200       # number of Monte Carlo paths per asset
 const N_YEARS       = 10        # simulation horizon in years
 const N_TRADING_DAYS = N_YEARS * 252   # ≈ 252 trading days per year
 
-# Historical data range (max = full available history)
-const DATA_RANGE    = "max"
+# Historical data range for model fitting
+# Using 15 years rather than full history — avoids fitting to early growth eras
+# that may not be representative of current market dynamics
+const DATA_RANGE    = "15y"
 
 # Output directory for plots
 const OUTPUT_DIR    = "output"
