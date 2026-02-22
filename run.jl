@@ -15,7 +15,7 @@ using StockSim
 # ─────────────────────────────────────────────────────────────────────
 
 # Tickers to analyse (any Yahoo Finance symbol)
-const TICKERS = ["AAPL", "MSFT", "TSLA"]
+const TICKERS = ["XMWX.L", "XMMS.L", "ERNS.L"]
 
 # Simulation parameters
 const N_PATHS       = 200       # number of Monte Carlo paths per asset
